@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Gaming Blog - Inicio</title>
+
+{% extends "blog_app/padre.html" %}
+
+{% load static %}
+
+{% block esquina_izquierda %}     
+    Volver Arriba
+{% endblock %}
+
+{% block titulo %} Zona Gaming Blog {% endblock %}
+{% block Subtitulo %} Un espacio para la Comunidad Gaming {% endblock %}
+
+
+{% block contenido %} 
+
+    <h5> {{mensaje}}</h5>
+    <h1>Algo irá aqui despues </h1>
+{% endblock %}
+
+{% block clase_imagen_1 %}
+"img-fluid rounded-circle"
+{% endblock %}
+
+{% block imagen_1 %}
+"{% static 'blog_app/assets/img/01.jpg' %}"
+{% endblock %}
+
+{% block encabezado_contenido_1 %}
+    <h2> Noticia 1 </h2>     
+{% endblock %}
+
+{% block cuerpo_contenido_1 %}     
+    <p> Desarollo de la noticia ira aqui </p>
+{% endblock %}
+
+{% block encabezado_contenido_2 %}
+    <h2> Noticia 2 </h2>     
+{% endblock %}
+
+{% block cuerpo_contenido_2 %}     
+    <p> Desarollo de la noticia ira aqui </p>
+{% endblock %}
+
+{% block encabezado_contenido_3 %}
+    <h2> Noticia 3 </h2>     
+{% endblock %}
+
+{% block cuerpo_contenido_3 %}     
+    <p> Desarollo de la noticia ira aqui </p>
+{% endblock %}

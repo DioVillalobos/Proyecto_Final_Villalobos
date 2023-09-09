@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Blogs</title>
+</head>
+<body>
+    <h1> LISTA DE BLOG </h1> 
+    <ul>
+        {% for blog in blogs %}
+            <li>{{blog.nombre}} - {{blog.tema}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

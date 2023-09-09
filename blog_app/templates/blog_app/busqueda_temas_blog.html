@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Gaming Blog - Buscar Temas</title>
+
+{% extends "blog_app/padre.html" %}
+
+{% load static %}
+
+{% block esquina_izquierda %}     
+    Inicio
+{% endblock %}
+
+{% block titulo %} Zona Gaming Blog {% endblock %}
+{% block Subtitulo %} ¿Buscas algun tema de tu Interes? {% endblock %}
+
+{% block contenido %} 
+
+<h5> Intenta buscar escribiendo "Videojuego + tipo de juego" (Ejemplo: Videojuego Aventura)</h5>
+<form action="{% url 'buscar_tema' %}" method="GET">
+    <input type="text" name="busqueda_temas" id="busqueda_temas" placeholder="Inserta un Tema">
+    <input type="submit" value="Buscar Tema">
+</form>
+
+<h3>{{ mensaje }}</h3>
+{% endblock %}
