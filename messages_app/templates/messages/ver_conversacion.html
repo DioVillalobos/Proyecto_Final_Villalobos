@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Gaming Blog - Lista Mensajes</title>
+
+{% extends "blog_app/padre.html" %}
+
+{% load static %}
+
+{% block esquina_izquierda %}     
+    Inicio
+{% endblock %}
+
+{% block titulo %} Zona Gaming Blog {% endblock %}
+{% block Subtitulo %} Mensajes {% endblock %}
+
+{% block content %}
+  <h1>Conversación con {{ conversacion.usuario_destino }}</h1>
+  <div class="conversacion">
+    {% for mensaje in mensajes %}
+      <p>{% if mensaje.remitente == user %}<strong>Tú:</strong> {% endif %}{{ mensaje.contenido }}</p>
+    {% endfor %}
+  </div>
+  <form method="post" action="{% url 'enviar_mensaje' conversacion.id %}">
+    {% csrf_token %}
+    <textarea name="contenido" rows="4" cols="50" placeholder="Escribe tu mensaje aquí" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  <a href="{% url 'lista_conversaciones' %}">Volver a la lista de conversaciones</a>
+{% endblock %}

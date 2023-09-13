@@ -3,39 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Gaming Blog - Editor</title>
-
-{% extends "blog_app/padre.html" %}
-
-{% load static %}
+    <title>Editar Perfil</title>
+    {% extends "blog_app/padre.html" %}
+    {% load static %}
+</head>
+<body>
 
 {% block esquina_izquierda %}     
     Inicio
 {% endblock %}
 
 {% block titulo %} Zona Gaming Blog {% endblock %}
-{% block Subtitulo %} Editar Perfil de Usuarios {% endblock %}
+{% block Subtitulo %} Editar Perfil {% endblock %}
 
-{% block contenido %} 
 
-<h1> Edita los Usuarios Registrados </h1>
-
-<h5>Formulario </h5>
-<form action="{% if usuario.id %}{% url 'editar_perfil' usuario.id %}{% endif %}" method="POST"> {% csrf_token %}
-
-    <input type="hidden" name="id" value="{{ usuario.id }}"> <!-- Campo oculto para el id -->
-
-    <table>
-    
-    {{ form.as_table }}
-
-    <input type="submit" name="editar_usuario" value="Editar Perfil">
-
-    </table>
-
-</form>
-
-<h3>{{ mensaje }}</h3>
-    
-{% endblock %}
+    <h1>Editar Perfil</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>
 

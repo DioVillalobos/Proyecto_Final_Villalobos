@@ -3,9 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
+    <title>Registro de Usuario</title>
+    {% extends "blog_app/padre.html" %}
+    {% load static %}
 </head>
 <body>
-    <h1> PAGINA DE PERFIL DE USUARIO </h1>
+
+{% block esquina_izquierda %}     
+    Inicio
+{% endblock %}
+
+{% block titulo %} Zona Gaming Blog {% endblock %}
+{% block Subtitulo %} Registro de Nuevos Usuarios {% endblock %}
+
+{% block contenido %} 
+
+<h1>Registro de Nuevos Usuarios</h1>
+
+<!-- Agrega un formulario de registro aquí -->
+<form method="post" action="{% url 'registrar_usuario' %}">
+  {% csrf_token %}
+  {{ formulario.as_p }}
+  <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+</form>
+<!-- Fin del formulario de registro -->
+
+<h3>{{ mensaje }}</h3>
+
+<h5> Usuarios Registrados</h5>
+<table>
+    <thread>
+        <tr>
+            <th>Usuario</th>
+            <th>Correo</th>
+            <th>OPCIONES</th>
+        </tr>
+    </thread>
+    <tbody>
+        {% for usuario in usuarios_registrados %}
+        <tr>
+            <td>
+                {{usuario.nombre_usuario}}
+            </td>
+            <td>
+                {{usuario.email_usuario}}
+            </td>
+            <td>
+                <a href="{% url 'eliminar_perfil' usuario.id %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-success">Editar (ID: {{ usuario.id }})</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    
+{% endblock %}
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Gaming Blog - Nuevo Mensajes</title>
+
+{% extends "blog_app/padre.html" %}
+
+{% load static %}
+
+{% block esquina_izquierda %}     
+    Inicio
+{% endblock %}
+
+{% block titulo %} Zona Gaming Blog {% endblock %}
+{% block Subtitulo %} Mensajes {% endblock %}
+
+{% block content %}
+  <h1>Iniciar Nueva Conversación</h1>
+  <form method="post" action="{% url 'crear_conversacion' %}">
+    {% csrf_token %}
+    <label for="destinatario">Selecciona un destinatario:</label>
+    <select name="destinatario" id="destinatario">
+      {% for usuario in usuarios %}
+        <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <label for="contenido">Mensaje:</label>
+    <textarea name="contenido" id="contenido" rows="4" cols="50"></textarea>
+    <br>
+    <input type="submit" value="Enviar">
+  </form>
+  <a href="{% url 'lista_conversaciones' %}">Volver a la lista de conversaciones</a>
+{% endblock %}

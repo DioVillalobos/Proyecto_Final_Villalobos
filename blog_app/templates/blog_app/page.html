@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Gaming Blog - Listado</title>
+
+    {% extends "blog_app/padre.html" %}
+    {% load static %}
+    
+    {% block esquina_izquierda %}     
+        Inicio
+    {% endblock %}
+    
+    {% block titulo %} Zona Gaming Blog {% endblock %}
+    {% block Subtitulo %} Un listado con las Entradas Disponibles {% endblock %}
+    
+    {% block contenido %} 
+    <h1> Blogs</h1>
+    <ul>
+        {% for page in pages %}
+        <li>
+            <h2>{{ page.nombre_page }}</h2>
+            <p>{{ page.tema_page }}</p>
+            <img src="{{ page.imagen_page.url }}" alt="{{ page.nombre_page }}" class="img-fluid" style="max-width: 500px; max-height: 500px;">
+            <a href="{% url 'detalle_blog' page.id %}" class="btn btn-primary">Leer más</a>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'crear_blog' %}" class="btn btn-primary">Crear nuevo blog</a>
+    
+    <div class="pagination">
+        <span class="step-links">
+            {% if pages.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ pages.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current-page">{{ pages.number }}</span>
+            
+            {% if pages.has_next %}
+                <a href="?page={{ pages.next_page_number }}">next</a>
+                <a href="?page={{ pages.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endblock %}
+</html>
+

@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Gaming Blog - Registro</title>
-
-{% extends "blog_app/padre.html" %}
-
-{% load static %}
+    <title>Perfil de Usuario</title>
+    {% extends "blog_app/padre.html" %}
+    {% load static %}
+</head>
+<body>
 
 {% block esquina_izquierda %}     
-    Volver Arriba
+    Inicio
 {% endblock %}
 
 {% block titulo %} Zona Gaming Blog {% endblock %}
 {% block Subtitulo %} Un espacio para la Comunidad Gaming {% endblock %}
 
 {% block contenido %} 
-    <h3> Registro de Nuevos Usuarios </h3>
+<h1>Perfil de Usuario</h1>
 
-    <h3>{{mensaje}}</h3>
+<h2>Información del Usuario</h2>
+<p><strong>Nombre de usuario:</strong> {{ usuario.username }}</p>
+<p><strong>Nombre:</strong> {{ usuario.first_name }}</p>
+<p><strong>Apellido:</strong> {{ usuario.last_name }}</p>
+<p><strong>Email:</strong> {{ usuario.email }}</p>
 
-    <form action="{% url 'register' %}" method="POST"> {% csrf_token %}
+{% if avatar %}
+    <h2>Avatar</h2>
+    <img src="{{ avatar.img.url }}" alt="Avatar de {{ usuario.username }}" style="max-width: 200px; max-height: 200px;">
+{% endif %} 
 
-        <table>
+<h2>Editar Perfil</h2>
+<a href="{% url 'editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
 
-            {{form.as_table}}
+<!-- Agrega la sección para eliminar perfil aquí -->
+<h2>Eliminar Perfil</h2>
+<form method="post" action="{% url 'eliminar_perfil' %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Eliminar Mi Perfil</button>
+</form>
+<!-- Fin de la sección para eliminar perfil -->
 
-        </table>
-
-        <input type="submit" value="REGISTRAR USUARIO">
-
-    </form>
 {% endblock %}
+</body>
+</html>

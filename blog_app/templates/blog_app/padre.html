@@ -27,14 +27,18 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         {% if user.is_authenticated %}
-                        <p style="color: white;">Bienvenido: {{user.username}} <span style="margin-left: 10px;"></span></p>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'blog' %}">Listado de Blogs</a></li> <!-- Tomar esto como ejemplo de botones que nos redireccionan a otra URL -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'page_with_id' page_id=1 %}">Blogs/Noticias</a></li> <!-- Tomar esto como ejemplo de botones que nos redireccionan a otra URL -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'perfil_usuario' %}">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'lista_conversaciones' %}">Mensajes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                        <p style="color: white;">Bienvenido: {{user.username}} <span style="margin-left: 10px;"></span></p>
+                        <img src="{{ avatar }}" alt="Avatar" style="max-width: 25px; max-height: 25px;"/>
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'registrar_usuario' %}">Registrarse</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                         {% endif %}
-                        <img src="{{ avatar }}" alt="Avatar" style="max-width: 25px; max-height: 25px;"/>
+                        
                     </ul>
                 </div>
             </div>
@@ -76,7 +80,7 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'blog_app/assets/img/02.jpg' %}" alt="..." /></div> <!-- Imagen 2 -->
+                        <div class="p-5"><img class= {% block clase_imagen_2 %} {% endblock %} src={% block imagen_2 %} {% endblock %}/></div> <!-- Imagen 2 -->
                     </div>
                     <div class="col-lg-6">
                         <div class="p-5">
@@ -92,7 +96,7 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'blog_app/assets/img/03.jpg' %}" alt="..." /></div> <!-- Imagen 3 -->
+                        <div class="p-5"><img class= {% block clase_imagen_3 %} {% endblock %} src={% block imagen_3 %} {% endblock %}/></div> <!-- Imagen 3 -->
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">

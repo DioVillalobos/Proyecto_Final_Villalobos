@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Gaming Blog - Registro</title>
-
-{% extends "blog_app/padre.html" %}
+    <title>Registro de Usuario</title>
+    <!-- Agrega aquí tus etiquetas meta, hojas de estilo, o scripts si es necesario -->
+</head>
+<body>
+    {% extends "blog_app/padre.html" %}
 
 {% load static %}
 
@@ -14,51 +16,47 @@
 {% endblock %}
 
 {% block titulo %} Zona Gaming Blog {% endblock %}
-{% block Subtitulo %} Registro de Nuevos Usuarios {% endblock %}
+{% block Subtitulo %} Acerca de Mi {% endblock %}
 
 {% block contenido %} 
 
-<h1> Registrar Nuevos Usuarios </h1>
+<h1>Registro de Usuario</h1>
 
-<h5>Formulario </h5>
-<form action="{% url 'registrar_usuario' %}" method="POST"> {% csrf_token %}
+<!-- Mostrar mensajes de éxito o error si es necesario -->
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
-    {{ formulario.as_p }}
-
-    <input type="submit" value="Registrar Usuario">
-
+<form method="post" action="{% url 'registrar_usuario' %}"> {% csrf_token %}
+  <table>
+    <tr>
+        <td><label for="username">Nombre de usuario:</label></td>
+        <td><input type="text" id="username" name="username" required></td>
+    </tr>
+    <tr>
+        <td><label for="password">Contraseña:</label></td>
+        <td><input type="password" id="password" name="password" required></td>
+    </tr>
+    <tr>
+        <td><label for="confirm_password">Confirmar contraseña:</label></td>
+        <td><input type="password" id="confirm_password" name="confirm_password" required></td>
+    </tr>
+    <tr>
+        <td><label for="email">Correo electrónico:</label></td>
+        <td><input type="email" id="email" name="email" required></td>
+    </tr>
+    <!-- Agrega más filas para más campos si es necesario -->
+  </table>
+  <button type="submit">Registrarse</button>
 </form>
 
-<h3>{{ mensaje }}</h3>
+<!-- Agrega enlaces a otras páginas si es necesario -->
 
-<h5> Usuarios Registrados</h5>
-<table>
-    <thread>
-        <tr>
-            <th>Usuario</th>
-            <th>Correo</th>
-            <th>OPCIONES</th>
-        </tr>
-    </thread>
-    <tbody>
-        {% for usuario in usuarios_registrados %}
-        <tr>
-            <td>
-                {{usuario.nombre_usuario}}
-            </td>
-            <td>
-                {{usuario.email_usuario}}
-            </td>
-            <td>
-                <a href="{% url 'eliminar_usuario' usuario.id %}" class="btn btn-danger">Eliminar</a>
-                <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-success">Editar (ID: {{ usuario.id }})</a>
-
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-    
+<p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
 {% endblock %}
-
+</body>
+</html>
